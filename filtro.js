@@ -7,36 +7,40 @@ const productos = [
   {nombre: "Bota azul", tipo: "bota", color: "azul", img: "./bota-azul.jpg"},
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
-
-const li = document.getElementsByName("lista-de-productos")
+//Se cambia a element by ID
+const li = document.getElementById("lista-de-productos")
+//la clase en input en HTML no estaba declarada
 const $i = document.querySelector('.input');
+//crar funcion displayPrroductos
+function displayProductos() {
+//colocar ";" para delimitar las sentencias
 
-for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
-
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
+  for (let i = 0; i < productos.length; i++) {
+    var d = document.createElement("div");
+    d.classList.add("producto");
   
-  var imagen = document.createElement("img");
-  imagen.setAttribute('src', productos[i].img);
-
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-  li.appendChild(d)
+    var ti = document.createElement("p");
+    ti.classList.add("titulo");
+    ti.textContent = productos[i].nombre;
+    
+    var imagen = document.createElement("img");
+    imagen.setAttribute('src', productos[i].img);
+  
+    d.appendChild(ti)
+    d.appendChild(imagen)
+  
+    li.appendChild(d)
+  }  
 }
-
-displayProductos(productos)
+displayProductos()
 const botonDeFiltro = document.querySelector("button");
 
 botonDeFiltro.onclick = function() {
   while (li.firstChild) {
     li.removeChild(li.firstChild);
   }
-
-  const texto = $i.value;
+  //Agregamos toLowerCase para que no afecten las mayusculas
+  const texto = $i.value.toLowerCase();
   console.log(texto);
   const productosFiltrados = filtrado(productos, texto );
 
